@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [[ "$RESTORE" == "true" ]]; then
   ./restore.sh
