@@ -1,7 +1,17 @@
-FROM ubuntu:trusty
-MAINTAINER Borja Burgos <borja@tutum.co>, Mia Iversen <mia@chillfox.com
+FROM alpine:3.6
+MAINTAINER Khoa Tran <khoatran.geek@gmail.com>
 
-RUN apt-get update && apt-get install -y python-pip && pip install awscli
+RUN apk -v --update add \
+        python \
+        py-pip \
+        groff \
+        less \
+        mailcap \
+        && \
+    pip install --upgrade awscli s3cmd python-magic && \
+    apk -v --purge del py-pip && \
+    rm /var/cache/apk/*
+VOLUME /root/.aws
 
 ADD backup.sh /backup.sh
 ADD restore.sh /restore.sh
